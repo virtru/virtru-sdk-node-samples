@@ -6,7 +6,7 @@ Node.js command line script to encrypt & upload files to and decrypt & download 
 - Virtru JS SDK:
   - `npm install virtru-sdk`
 - Drive-enabled G Suite Account.
-- Destination folder ID. 
+- Destination / source folder ID. 
 - [Drive API Enabled](https://developers.google.com/drive/api/v3/enable-drive-api) & credentials generated (see [Drive Node.js Quickstart](https://developers.google.com/drive/api/v3/quickstart/nodejs)).
 - Drive client library:
   - `npm install googleapis@39 --save`
