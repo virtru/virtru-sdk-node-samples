@@ -11,7 +11,7 @@ Node.js command line script to encrypt & upload files to and decrypt & download 
 - Drive client library:
   - `npm install googleapis@39 --save`
 
-## Required User Inputs
+## User Inputs
 - **./.virtru/emailAddress**
   - Add the data owner's email address to file.
 - **./.virtru/appId**
