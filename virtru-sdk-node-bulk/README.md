@@ -1,5 +1,5 @@
 # Virtru SDK Node Bulk Encrypt / Decrypt
-Node.js command line script to encrypt & decrypt files locally.
+Node.js command line script to encrypt & decrypt batches of files locally.
 
 ## Prerequisites
 - [Node.js & npm](https://docs.npmjs.com/getting-started/installing-node#1-install-nodejs--npm) installed.
