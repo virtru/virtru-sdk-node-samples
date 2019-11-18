@@ -1,6 +1,3 @@
-# virtru-sdk-node-samples
-NodeJS samples for the Virtru SDK.
-
 # Virtru SDK NodeJS Samples
 NodeJS samples for the [Virtru Platform SDK](https://developer.virtru.com/)
 
