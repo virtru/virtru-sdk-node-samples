@@ -3,8 +3,8 @@ const fs = require('fs');
 const {google} = require('googleapis');
 const readline = require('readline');
 
-// TODO: Assign the Drive folder ID to which you'll upload content.
-var folderId = '';
+
+var folderId = JSON.parse(fs.readFileSync('.google/folderId.json'))['folderId'];
 
 // ***** Virtru Stuff *****
 
@@ -14,15 +14,14 @@ var folderId = '';
  * @return {array} [appId, email] Values of appId & email.
  */
 function getCreds() {
-  const appId = fs.readFileSync('.virtru/appId').toString().replace('\n', '');
-  const email = fs.readFileSync('.virtru/emailAddress').toString().replace('\n', '');
+  const appId = JSON.parse(fs.readFileSync('.virtru/virtruCreds.json'))['appId'];
+  const email = JSON.parse(fs.readFileSync('.virtru/virtruCreds.json'))['emailAddress'];
   return [appId, email];
 }
 
 // Assign credentials to respective variables.
-var creds = getCreds();
-const appId = creds[0];
-const email = creds[1];
+const appId = getCreds()[0];
+const email = getCreds()[1];
 
 // Generate the Virtru Client
 const client = new Virtru.Client({email, appId});
@@ -36,9 +35,10 @@ const client = new Virtru.Client({email, appId});
  *                      by 'authorize' function.
  */
 function virtruStart(auth) {
+
   promises = fs.readdirSync('./encrypt-in/').filter(function(x) {
     return x !== '.DS_Store';
-  }).map(filename => encrypt(filename, auth));
+  }).map(fileName => encrypt(fileName, auth));
 
 
   Promise.all(promises).then(() =>
@@ -54,17 +54,18 @@ function virtruStart(auth) {
  * @param {object} auth Drive Authorization object created
  *                      by 'authorize' function.
  */
-async function encrypt(filename, auth){
+async function encrypt(fileName, auth){
   const encryptParams = new Virtru.EncryptParamsBuilder()
-    .withFileSource(`./encrypt-in/${filename}`)
-    .withDisplayFilename(filename)
+    .withFileSource(`./encrypt-in/${fileName}`)
+    .withDisplayFilename(fileName)
     .build();
   ct = await client.encrypt(encryptParams);
   var ctString = await ct.toString();
 
   const drive = google.drive({version: 'v3', auth});
+
   var fileMetadata = {
-    'name': `${filename}.tdf3.html`,
+    'name': `${fileName}.tdf3.html`,
     parents: [folderId]
   };
   var media = {
@@ -79,9 +80,9 @@ async function encrypt(filename, auth){
     if (err) {
       // Handle error
       console.error(err);
-      console.log(`${filename} - ERROR.`)
+      console.log(`${fileName} - ERROR.`)
     } else {
-      console.log(`- ${filename}`);
+      console.log(`- ${fileName}`);
     }
   });
 }
