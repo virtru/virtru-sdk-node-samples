@@ -3,8 +3,7 @@ const fs = require('fs');
 const {google} = require('googleapis');
 const readline = require('readline');
 
-// TODO: Assign the Drive folder ID from which you'll download content.
-var folderId = '';
+var folderId = JSON.parse(fs.readFileSync('.google/folderId.json'))['folderId'];
 
 // ***** Virtru Stuff *****
 
@@ -14,15 +13,14 @@ var folderId = '';
  * @return {array} [appId, email] Values of appId & email.
  */
 function getCreds() {
-  const appId = fs.readFileSync('.virtru/appId').toString().replace('\n', '');
-  const email = fs.readFileSync('.virtru/emailAddress').toString().replace('\n', '');
+  const appId = JSON.parse(fs.readFileSync('.virtru/virtruCreds.json'))['appId'];
+  const email = JSON.parse(fs.readFileSync('.virtru/virtruCreds.json'))['emailAddress'];
   return [appId, email];
 }
 
 // Assign credentials to respective variables.
-var creds = getCreds();
-const appId = creds[0];
-const email = creds[1];
+const appId = getCreds()[0];
+const email = getCreds()[1];
 
 // Generate the Virtru Client
 const client = new Virtru.Client({email, appId});
@@ -78,7 +76,7 @@ function getFiles(auth) {
     auth
   });
   drive.files.list({
-    pageSize: 10,
+    //pageSize: 10,
     fields: 'nextPageToken, files(id, name)',
     q: `'${folderId}' in parents and name contains "tdf3.html" and trashed = false`
   }, (err, res) => {
