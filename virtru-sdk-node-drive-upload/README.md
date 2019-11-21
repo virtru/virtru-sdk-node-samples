@@ -12,13 +12,11 @@ Node.js command line script to encrypt & upload files to and decrypt & download 
   - `npm install googleapis@39 --save`
 
 ## User Inputs
-- **./.virtru/emailAddress**
-  - Add the data owner's email address to file.
-- **./.virtru/appId**
-  - [Generate a Virtru AppID](https://developer.virtru.com/docs/how-to-add-authentication#section-1-appid-token-downloaded) for the above email address and add to file.
+- **./.virtru/virtruCreds.json**
+  - Replace values for "appId" and "emailAddress" with your credentials..
 - **./.google/credentials.json**
   - Generated when [Drive API Enabled](https://developers.google.com/drive/api/v3/enable-drive-api).  Store in ./.google/.
-- **./.google/folderId**
+- **./.google/folderId.json**
   - Input the folderId to / from which you'll be uploading / downloading secure content.  
 
 ## Encrypt
