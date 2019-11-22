@@ -101,7 +101,7 @@ const TOKEN_PATH = './.google/token.json';
 // ADDED:  Call 'virtruStart' function once secrets loaded.
 fs.readFile('./.google/credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Drive API.
+  // Authorize a client with credentials, then call virtruStart.
   authorize(JSON.parse(content), virtruStart);
 });
 
