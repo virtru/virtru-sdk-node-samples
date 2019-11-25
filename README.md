@@ -8,3 +8,4 @@ NodeJS samples for the [Virtru Platform SDK](https://developer.virtru.com/)
 
 ## Samples
 - [Secure Upload to Google Drive](./virtru-sdk-node-drive-upload/)
+- [Bulk Encrypt & Decrypt](./virtru-sdk-node-bulk)
